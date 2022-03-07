@@ -1,18 +1,13 @@
 #include "Player.h"
 #include <iostream>
 
-
 using namespace std;
-
 
 void Player::playerthrow(Dartboard& Board)
 {
-
 	int actual_score;
 	bool done = false;
-
-
-
+	
 	if (score >= 110) //throw triple 20 until 110 is met
 	{
 		actual_score = Board.throw_treble(20, chance);
@@ -22,7 +17,6 @@ void Player::playerthrow(Dartboard& Board)
 	{
 		if (score == 50) //throw a bullseye to win
 		{
-
 			actual_score = Board.throw_bull(chance);
 			//cout << "bull" << endl;
 		}
@@ -41,67 +35,50 @@ void Player::playerthrow(Dartboard& Board)
 					{
 						if (!(j == 3 && z == 25)) //exclude triple 25
 						{
-
 							int value = z * j;
 
 							if (score - value == i) //if this throw leads to a double
 							{
-
 								if (value == 50)
 								{
 									actual_score = Board.throw_bull(chance);
 									//cout << "bull" << endl;
 									done = true;
 								}
-
-
 								switch (j) //choose right throw function
 								{
-
 								case 1:
 									actual_score = Board.throw_single(z);
 									//cout << "single" << z << endl; break;
-
 								case 2:
 									actual_score = Board.throw_double(z);
 									//cout << "double" << z << endl; break;
-
 								case 3:
 									actual_score = Board.throw_treble(z, chance);
 									//cout << "treble" << z << endl; break;
 								}
-
 								done = true;
-
 							}
-
 						}
-
 					}
-
 				}
-
 			}
 			if (!done)
 			{
-
 				actual_score = Board.throw_treble(20, chance);
 				//cout << "treble_20" << endl;
 			}
 		}
 	}
-
 	if (actual_score <= score)
 	{
 		score -= actual_score;
 	}
 }
 
-
 Player::Player()
 {
 }
-
 
 Player::~Player()
 {
